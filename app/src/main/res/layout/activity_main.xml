@@ -9,6 +9,7 @@
     <EditText
         android:hint="Nama"
         android:id="@+id/etNama"
+        android:inputType="textCapWords"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -17,17 +18,20 @@
         android:id="@+id/etNim"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
+        android:inputType="number"
         android:layout_height="wrap_content" />
     <EditText
-        android:hint="Jururuan"
+        android:hint="Jurusan"
         android:id="@+id/etJurusan"
+        android:inputType="textCapWords"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:hint="Alamat"
+        android:hint="No Telepon"
         android:id="@+id/etTelp"
         android:layout_margin="5dp"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button

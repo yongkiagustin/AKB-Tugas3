@@ -5,6 +5,8 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.etTelp)
     EditText etTelp;
     Mahasiswa mahasiswa;
+    @BindView(R.id.btInsert)
+    Button btInsert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +42,17 @@ public class MainActivity extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         new OkHttpClient.Builder().addNetworkInterceptor(new StethoInterceptor()).build();
 
+        btInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonListener();
+            }
+        });
+
     }
-    @OnClick (R.id.btInsert)void buttonListener(){
+
+
+    void buttonListener(){
         if (!etTelp.getText().toString().isEmpty()&&!etJurusan.getText().toString().isEmpty()
                 &&!etNama.getText().toString().isEmpty()&&!etNim.getText().toString().isEmpty()){
             mahasiswa = new Mahasiswa();
