@@ -3,19 +3,58 @@ package id.yongki.tugas3;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import okhttp3.OkHttpClient;
+
+import static id.yongki.tugas3.MyApp.db;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.etNama)
+    EditText etNama;
+    @BindView(R.id.etNim)
+    EditText etNim;
+    @BindView(R.id.etJurusan)
+    EditText etJurusan;
+    @BindView(R.id.etTelp)
+    EditText etTelp;
+    Mahasiswa mahasiswa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "mahasiswa").allowMainThreadQueries().build();
-        db.userDao().insertAll(mahasiswa);
-        db.userDao().getAll();
-        db.userDao().findByName("");
-        db.userDao().deleteUsers(mahasiswa);
+        Stetho.initializeWithDefaults(this);
+        new OkHttpClient.Builder().addNetworkInterceptor(new StethoInterceptor()).build();
+
+    }
+    @OnClick (R.id.btInsert)void buttonListener(){
+        if (!etTelp.getText().toString().isEmpty()&&!etJurusan.getText().toString().isEmpty()
+                &&!etNama.getText().toString().isEmpty()&&!etNim.getText().toString().isEmpty()){
+            mahasiswa = new Mahasiswa();
+            mahasiswa.setNim(etNim.getText().toString());
+            mahasiswa.setNama(etNama.getText().toString());
+            mahasiswa.setJurusan(etJurusan.getText().toString());
+            mahasiswa.setNotlp(etTelp.getText().toString());
+
+            //Insert data to database
+            db.UserDao().insertAll(mahasiswa);
+            startActivity(new Intent(MainActivity.this, DetailActivity.class));
+
+        }else{
+            Toast.makeText(this,"Mohon Masukkan Data Dengan Benar!",Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
