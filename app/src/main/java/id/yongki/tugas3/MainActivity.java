@@ -20,6 +20,9 @@ import okhttp3.OkHttpClient;
 
 import static id.yongki.tugas3.MyApp.db;
 
+//29 April 2020 08.10 Layouting detail_activity dan Main_activity
+//29 April 2020 10.35 membuat database room dan fungsinya
+//29 April 2020 15.35 membuat dan layouting recyclerview_layout
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.etNama)
